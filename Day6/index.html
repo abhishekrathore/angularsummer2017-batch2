@@ -1,0 +1,21 @@
+<html>      
+<head>
+<title>Basic DOM </title>
+</head>
+<body>
+    <input id="input1" type="text" onkeyup="changeText()" >
+    <button >Change</button>
+    <p id="para1">Hello</p>
+
+<script>
+   function changeText(){
+    var input = document.getElementById("input1");        
+    console.log(input.value);
+
+    var para = document.getElementById("para1");
+    para.innerText = input.value;
+   }
+
+</script>
+</body>
+</html>
