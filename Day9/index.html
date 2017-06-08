@@ -1,0 +1,28 @@
+<html>
+    <head>
+    <link rel="stylesheet" href="bower_components/flag-icon-css/css/flag-icon.css">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="app.js"></script>
+    </head>
+    <body ng-app="flag">
+
+        <div ng-controller="flagCtrl as flag">
+                {{flag.name}}
+                <button ng-click="flag.flagGen()">Fire</button>
+                <span class="flag-icon flag-icon-{{flag.randomCode}}"></span>
+                <input type="text" ng-model="flag.nation">
+                <h1 ng-if="flag.nation && flag.nation==flag.correctNation">This is Correct !!</h1>
+  
+       <button>{{}}</button>
+       <button>{{}}</button>
+       <button>{{}}</button>
+       <button>{{}}</button>
+
+
+
+        </div>
+
+
+        
+    </body>
+</html>
