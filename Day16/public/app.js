@@ -1,4 +1,4 @@
-angular.module("todoApp",['ngRoute'])
+angular.module("todoApp",['ngRoute','firebase'])
 .config(function($routeProvider){
 
 $routeProvider
@@ -26,31 +26,35 @@ function todolists(){
     return []
 }
 
-function homeCtrl(lists,todolists){
+function homeCtrl($firebaseArray,todolists){
     var home = this;
-    home.lists= lists;
+
+   var listRef = firebase.database().ref("lists");
+   var lists = $firebaseArray(listRef);
+
+
+    home.lists= lists ;
    
     home.add = function(listItem){
-       home.lists.push(listItem);
+       home.lists.$add({"name":listItem});
        todolists.push({name:listItem,data:[]})
        console.log(home.lists);
    }
 
 }
 
-function todoCtrl(todolists,$routeParams){
+function todoCtrl($routeParams,$firebaseArray){
     var todo = this;
 
     todo.tasks = [];
     console.log($routeParams);
     todo.name = $routeParams.listname
 
-for(i=0;i<todolists.length;i++){
-    if(todo.name == todolists[i].name){
-            todo.tasks = todolists[i].data;
+    var taskRef = firebase.database().ref('tasks').child(todo.name);
+    todo.tasks = $firebaseArray(taskRef)
 
-    }
-}
+    
+
 
     todo.editMode = false;
     var savedIndex =0;
@@ -61,7 +65,7 @@ for(i=0;i<todolists.length;i++){
         var obj = {};
         obj.title = todo.task;
         obj.status = false;
-        todo.tasks.push(obj);
+        todo.tasks.$add(obj);
         todo.task = "";
         console.log(todo.tasks);
     }
@@ -79,6 +83,7 @@ for(i=0;i<todolists.length;i++){
 
      todo.setStatus = function(i){
       todo.tasks[i].status = !todo.tasks[i].status;
+      todo.tasks.$save(i);
       console.log(todo.tasks);
     }
 

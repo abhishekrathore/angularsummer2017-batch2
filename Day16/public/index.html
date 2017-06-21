@@ -1,0 +1,35 @@
+<html ng-app="todoApp">      
+<head>
+<title>Angular- Controller </title>
+<link rel="stylesheet" href="bootstrap.css">
+<script src="angular.js"></script>
+<script src="angular-route.js"></script>
+<script src="app.js"></script>
+<script src="firebase.js"></script>
+<script src="angularfire.js"></script>
+<script src="app.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCiCNoTD3Q7KpeeNOSWdqqd5MLb_X-V34U",
+    authDomain: "test-b5866.firebaseapp.com",
+    databaseURL: "https://test-b5866.firebaseio.com",
+    projectId: "test-b5866",
+    storageBucket: "test-b5866.appspot.com",
+    messagingSenderId: "176864572853"
+  };
+  firebase.initializeApp(config);
+</script>
+
+
+
+</head>
+<body>
+
+<ng-view>   
+
+</ng-view>
+
+
+</body>
+</html>
