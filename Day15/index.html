@@ -1,14 +1,12 @@
-<html ng-app="firebaseApp">      
+<html ng-app="todoApp">      
 <head>
 <title>Angular- Controller </title>
 <link rel="stylesheet" href="bootstrap.css">
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/firebase/firebase.js"></script>
-<script src="bower_components/angularfire/dist/angularfire.js"></script>
+<script src="angular.js"></script>
+<script src="angular-route.js"></script>
 <script src="app.js"></script>
 
-
-
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 <script>
   // Initialize Firebase
   var config = {
@@ -16,7 +14,7 @@
     authDomain: "test-b5866.firebaseapp.com",
     databaseURL: "https://test-b5866.firebaseio.com",
     projectId: "test-b5866",
-    storageBucket: "test-b5866.appspot.com",
+    storageBucket: "",
     messagingSenderId: "176864572853"
   };
   firebase.initializeApp(config);
@@ -25,16 +23,9 @@
 </head>
 <body>
 
-    <div ng-controller="todoCtrl as todo">
-       
-    
-     <div ng-repeat="student in todo.students">
+<ng-view>   
 
-             {{$index}} {{student.name}} | {{student.age}}
-     </div>
-
-    
-    </div>
+</ng-view>
 
 
 </body>
