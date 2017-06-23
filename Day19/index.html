@@ -1,0 +1,33 @@
+<html ng-app="filterApp">      
+<head>
+<title>Angular- Filter </title>
+<script src="angular.js"></script>
+<script src="app.js"></script>
+
+
+</head>
+<body>
+
+
+  <div ng-controller="todoCtrl as todo">
+  <input type="text" ng-model="todo.search.first_name">
+    <input type="text" ng-model="todo.search.region">
+
+  {{todo.search}}
+
+  <!--<div ng-repeat="nation in todo.nations | filter:todo.search:true | orderBy:'-name'">
+     {{$index+1}}. {{nation.name | uppercase}} |  {{nation.region}}
+  </div>-->
+   <div ng-repeat="person in todo.people | filter:todo.search:true | orderBy:'-name'">
+     {{$index+1}}. {{person.first_name | wordcount}} |  {{person.amount | number:2}} {{person.dob | date: "dd/MM/yyyy" }}
+  </div>
+
+
+
+
+
+   </div>
+
+
+</body>
+</html>
