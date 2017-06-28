@@ -1,0 +1,27 @@
+<html ng-app="todoApp">      
+<head>
+<title>Angular- API </title>
+<script src="angular.js"></script>
+<script src="app.js"></script>
+<style>
+    .thumb{
+        width:200px;
+        height:200px;
+    }
+    </style>
+</head>
+<body>
+
+    <div ng-controller="todoCtrl as todo">
+        <input type="text" ng-model="todo.search">
+        <button ng-click="todo.getData()">Get Data</button>
+        <div ng-repeat ="superhero in todo.superheros">
+            <h1> {{superhero.name}}</h1>
+            <img class="thumb" ng-src="{{superhero.thumbnail.path}}.{{superhero.thumbnail.extension}}">
+        </div>
+    </div>
+
+  
+
+</body>
+</html>
