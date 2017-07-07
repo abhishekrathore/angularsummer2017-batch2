@@ -53,4 +53,28 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+})
+.controller('SearchCtrl',function($cordovaFlashlight,  $cordovaSocialSharing){
+
+  var search = this;
+  search.name = "abc";
+  search.light = light;
+
+function light(){
+    // $cordovaFlashlight.toggle()
+    // .then(function (success) { /* success */ },
+  //   function (error) { /* error */ });
+  
+    $cordovaSocialSharing
+    .shareViaWhatsApp("angular")
+    .then(function(result) {
+      console.log(result)
+    }, function(err) {
+      console.log(err)
+    });
+}
+
+
+
+
+})

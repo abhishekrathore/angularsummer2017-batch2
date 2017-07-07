@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic','ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -23,8 +23,11 @@ angular.module('starter', ['ionic'])
   });
 }).controller("demoCtrl",demoCtrl)
 
-function demoCtrl($scope,$ionicPopup){
+function demoCtrl($scope,$ionicPopup,$cordovaGeolocation,$cordovaLaunchNavigator,$cordovaCamera
+){
 
+
+   var demo  = this;
   var myPopup = $ionicPopup.show({
     template: '<input type="password" ng-model="data.wifi">',
     title: 'Enter Wi-Fi Password',
@@ -33,14 +36,67 @@ function demoCtrl($scope,$ionicPopup){
     buttons: [
       { text: 'Cancel' },
       {
-        text: '<b>Save</b>',
+        text: '<b>Location</b>',
         type: 'button-positive',
         onTap: function(e) {
-        
+           location()
         }
       }
     ]
   });
+
+
+  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+ function location(){
+  $cordovaGeolocation
+    .getCurrentPosition(posOptions)
+    .then(function (position) {
+      var lat  = position.coords.latitude
+      var long = position.coords.longitude
+      navigation(lat,long);
+      console.log(lat,long);
+    })
+ }
+
+ function navigation(lat,long){
+     var start = [lat, long];
+	var destination = "Delhi";
+  console.log(lat,long)
+    $cordovaLaunchNavigator.navigate(destination, start).then(function() {
+      console.log("Navigator launched");
+    }, function (err) {
+      console.log(err);
+    });
+ }
+
+demo.capture = capture;
+ function capture(){
+
+ var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 200,
+      targetHeight: 200,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false,
+	  correctOrientation:true
+    };
+
+    $cordovaCamera.getPicture(options).then(function(imageData) {
+      var image = document.getElementById('img');
+      image.src = "data:image/jpeg;base64," + imageData;
+    }, function(err) {
+      console.log(err)
+    });
+
+  
+
+
+
+ }
 
 
 }
