@@ -1,0 +1,42 @@
+<html ng-app="todoApp">      
+<head>
+<title>Angular- Form Validations </title>
+<link rel="stylesheet" href="bootstrap.css">
+<script src="angular.js"></script>
+<script src="app.js"></script>
+<style>
+    input.ng-invalid{
+     border:2px solid red;
+    }
+    input.ng-valid{
+        border:2px solid green;
+    }
+
+</style>
+</head>
+<body>
+
+    <div ng-controller="todoCtrl as todo">
+       
+    <form name="form1" ng-submit="todo.submit(form1)" novalidate>
+
+    <input name="firstname" type="text" ng-model="todo.name" ng-model-options="{debounce:1000}" required>
+    {{todo.name}}
+    <span ng-if="form1.firstname.$invalid && form1.$submitted">Name is Required</span>
+    <br>
+    <input name="lastname" type="text" ng-model="todo.lastname">
+    <br>
+    <input name="email" type="email" ng-model="todo.email" required ng-readonly="form1.email.$valid">
+    <span ng-if="form1.email.$error.required && form1.$submitted">Email is Required</span>
+    <br>
+    <span ng-if="form1.email.$error.email && form1.$submitted">Email format is incorrect</span>
+    <br>
+
+    <input class="btn btn-success" type="submit" ng-disabled="form1.$invalid">
+    </form>
+
+    </div>
+
+
+</body>
+</html>

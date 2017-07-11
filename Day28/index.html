@@ -1,0 +1,44 @@
+<html ng-app="firebaseApp">      
+<head>
+<title>Angular- Controller </title>
+<link rel="stylesheet" href="bootstrap.css">
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/firebase/firebase.js"></script>
+<script src="bower_components/angularfire/dist/angularfire.js"></script>
+<script src="app.js"></script>
+
+
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCiCNoTD3Q7KpeeNOSWdqqd5MLb_X-V34U",
+    authDomain: "test-b5866.firebaseapp.com",
+    databaseURL: "https://test-b5866.firebaseio.com",
+    projectId: "test-b5866",
+    storageBucket: "test-b5866.appspot.com",
+    messagingSenderId: "176864572853"
+  };
+  firebase.initializeApp(config);
+</script>
+
+</head>
+<body>
+
+    <div ng-controller="todoCtrl as todo">
+       
+    <input type="file" id="file">
+    <button ng-click="todo.upload()">upload</button>
+    {{todo.progress}}%
+
+
+
+     <div style="width:200px;height:100px" ng-repeat = "image in todo.images">
+      <img class="img-responsive" ng-src={{image.url}}>
+      </div>
+
+    </div>
+
+   
+</body>
+</html>
