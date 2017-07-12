@@ -1,0 +1,105 @@
+
+<div class="row" >
+    <div class="col-xs-3 sections userlist">
+        <div class="center">
+            <img class="dp customborder" src="avatar.jpeg">
+        </div>
+        <div class="sections center medium-font">
+           {{test.user.displayName}}
+        </div>
+        <div class="friend-list-div">
+            <ul class="list-group friend-list">
+                <li class="list-group-item">
+                    Mukul
+                </li>
+                <li class="list-group-item">
+                    Harsh
+                </li>
+                <li class="list-group-item">
+                    Mukul
+                </li>
+                <li class="list-group-item">
+                    Harsh
+                </li>
+                <li class="list-group-item">
+                    Mukul
+                </li>
+                <li class="list-group-item">
+                    Harsh
+                </li>
+                <li class="list-group-item">
+                    Mukul
+                </li>
+                <li class="list-group-item">
+                    Harsh
+                </li>
+            </ul>
+
+        </div>
+        <div class="center">
+            <button class="btn btn-block btn-danger" ng-click="test.logout()">Logout</button>
+        </div>
+
+    </div>
+
+    <div class="col-xs-9 sections chatarea">
+
+        <div class="chat-messages">
+
+          <div ng-repeat="chat in test.chats">
+            <div class="chat-left row" ng-if="test.user.uid!=chat.user">
+
+                <div class="user-chat-pic col-xs-2">
+                    <img class="thumb" src="avatar.jpeg">
+                </div>
+                <div class="chat-content col-xs-4">
+                    {{chat.text}}
+                </div>
+
+            </div>
+
+            <div class="chat-right row" ng-if="test.user.uid==chat.user">
+
+                <div class="chat-content col-xs-4 col-xs-offset-6">
+                    {{chat.text}}
+                </div>
+                <div class="user-chat-pic col-xs-2">
+                    <img class="thumb" src="avatar.jpeg">
+                </div>
+
+            </div>
+          </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+
+<div class="chat-input">
+
+    <textarea class="form-control" ng-model="test.input" ng-keypress="$event.keyCode==13 && test.addChat(test.input)"> </textarea>
+</div>
+
+
+<script>
+
+    var chatMessages = document.getElementsByClassName('chat-messages')[0];
+
+    var chatInput = document.getElementsByClassName('chat-input')[0];
+
+    console.log(chatMessages,chatInput)
+
+    chatMessages.style.height = (document.body.offsetHeight-chatInput.offsetHeight)+"px";
+
+    console.log(chatMessages.style.height);
+
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+</script>
